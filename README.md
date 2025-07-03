@@ -199,4 +199,4 @@ The following table lists the features associated with each query in SafeBench, 
 | feature_162        | Whether the query specifies batch execution mode.                             |
 
 ## Rule Library
-Please refer to [rule library](https://github.com/oceanbase/event_rules) for more details.
+Please refer to [rule library](https://github.com/SafeLoad-project/SafeBench/blob/main/rule_library.txt) for more details.
