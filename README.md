@@ -1,5 +1,5 @@
 # SafeBench
-SafeBench, an industrial-grade benchmark open-sourced to advance academic research on preemptively identifying memory-overloading (MO) queries. SafeBench was curated by the Alibaba Cloud [AnalyticDB](https://www.alibabacloud.com/en/product/analyticdb-for-mysql) team following rigorous data quality assessment and thorough removal of anomalous data. **The [homepage](https://safeload-project.github.io/SafeBench/) of SafeBench is now live.** **The datasets can be downloaded [here](https://www.kaggle.com/datasets/onefanwu/safebench).**
+SafeBench, an industrial-grade benchmark open-sourced to advance academic research on preemptively identifying memory-overloading (MO) queries. SafeBench was curated by the Alibaba Cloud [AnalyticDB](https://www.alibabacloud.com/en/product/analyticdb-for-mysql) team following rigorous data quality assessment and thorough removal of anomalous data. The [homepage](https://safeload-project.github.io/SafeBench/) of SafeBench is now live. **The datasets can be downloaded [here](https://www.kaggle.com/datasets/onefanwu/safebench).**
 
 | Subset | \#(Queries) | \#(Clusters) | \#(Pos.) |    G1    |    G2    |
 |:------:|:-----------:|:------------:|:--------:|:---------:|:--------:|
