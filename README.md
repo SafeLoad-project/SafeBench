@@ -28,6 +28,13 @@ A categorized summary of the features is provided in following table.
 | Cluster-level | Cluster Configuration            | Static configuration of the provisioned cluster, including the number of CPU cores and the resource group ID.                                                                                                                                                                                   |   6   |
 | Cluster-level | OOM Indicator                    | Number of OOM events observed in the corresponding cluster on the previous day.                                                                                                                                                                                                                 |   1   |
 
+# File Description
+The SafeBench datasets can be found [here](https://www.kaggle.com/datasets/onefanwu/safebench) at Kaggle. We take the three files from the A1 dataset as examples. The files **A1\_positive\_samples.parquet** and **A1\_negative\_samples.parquet** store the positive and negative samples, respectively, for the A1 dataset. Both Parquet files share an identical schema, comprising three columns: `processid_createtime`, `instance_name`, and `feat_vec`.
+
+The first two columns, `processid_createtime` and `instance_name`, are of **string type**. `processid_createtime` serves as a query identifier, while `instance_name` denotes the database cluster name. The third column, `feat_vec`, is a **float array** that holds a 163-dimensional feature vector. It is noteworthy that the latter part of the `processid_createtime` string, following the hyphen (`-`), represents the timestamp when the query occurred.
+
+The file **A1\_cputime.parquet** contains the actual total CPU time consumed by each query. This file has two columns: `processid_createtime` and `wall_time`. The `processid_createtime` column serves as the query identifier, while `wall_time` represents the CPU time consumed by the respective query.
+
 
 ## Feature Identifiers and Description
 The following table lists the features associated with each query in SafeBench, along with their identifiers and descriptions.
