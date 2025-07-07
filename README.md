@@ -1,13 +1,13 @@
 # SafeBench
-SafeBench, an industrial-grade benchmark open-sourced to advance academic research on preemptively identifying memory-overloading (MO) queries. SafeBench was curated by the [AnalyticDB](https://www.alibabacloud.com/en/product/analyticdb-for-mysql) team following rigorous data quality assessment and thorough removal of anomalous data.
+SafeBench, an industrial-grade benchmark open-sourced to advance academic research on preemptively identifying memory-overloading (MO) queries. SafeBench was curated by the Alibaba Cloud [AnalyticDB](https://www.alibabacloud.com/en/product/analyticdb-for-mysql) team following rigorous data quality assessment and thorough removal of anomalous data. **The [homepage](https://safeload-project.github.io/SafeBench/) of SafeBench is now live.** **The datasets can be downloaded [here](https://www.kaggle.com/datasets/onefanwu/safebench).**
 
-| Subset | \#(Queries) | \#(Clusters) | \#(Pos.) | Data Size |    G1    |    G2    |
+| Subset | \#(Queries) | \#(Clusters) | \#(Pos.) |    G1    |    G2    |
 |:------:|:-----------:|:------------:|:--------:|:---------:|:--------:|:--------:|
-|   A1   |  52,080,130 |      854     |   4,014  |   30 GB   | training |          |
-|   A2   |  50,856,068 |      862     |   2,508  |   29 GB   |  testing | training |
-|   A3   |  48,821,677 |      856     |   2,331  |   28 GB   |          |  testing |
+|   A1   |  52,080,130 |      854     |   4,014  | training |          |
+|   A2   |  50,856,068 |      862     |   2,508  |  testing | training |
+|   A3   |  48,821,677 |      856     |   2,331  |          |  testing |
 
-The Table outlines the specifications of SafeBench, which is constructed from real-world production data collected from Alibaba Cloud's data warehouse AnalyticDB. The dataset spans three continuous days, forming three distinct subsets: SafeBench A1 (Day 1), A2 (Day 2), and A3 (Day 3). These subsets include over 150 million analytical queries executed across more than 800 production database clusters. The average CPU time per query is 7.9 seconds (A1), 8.6 seconds (A2), and 8.6 seconds (A3), respectively. 
+This table outlines the specifications of SafeBench, which is constructed from real-world production data collected from Alibaba Cloud's data warehouse AnalyticDB. The dataset spans three continuous days, forming three distinct subsets: SafeBench A1 (Day 1), A2 (Day 2), and A3 (Day 3). These subsets include over 150 million analytical queries executed across more than 800 production database clusters. The average CPU time per query is 7.9 seconds (A1), 8.6 seconds (A2), and 8.6 seconds (A3), respectively. 
 
 To assess the effectiveness of MO query detection methods, we divide the datasets into two evaluation groups.
 Group G1 uses A1 for training and A2 for testing, while Group G2 uses A2 for training and A3 for testing. 
@@ -200,3 +200,6 @@ The following table lists the features associated with each query in SafeBench, 
 
 ## Rule Library
 Please refer to [rule library](https://github.com/SafeLoad-project/SafeBench/blob/main/rule_library.txt) for more details.
+
+## Copyright
+SafeBench is released under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). This license permits non-commercial use, distribution, and reproduction in any medium, provided the original author(s) and source are credited. For detailed terms, please refer to the [CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/) deed.
