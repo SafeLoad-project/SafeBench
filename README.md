@@ -1,5 +1,5 @@
 # SafeBench
-SafeBench, an industrial-grade benchmark open-sourced to advance academic research on preemptively identifying memory-overloading (MO) queries. SafeBench was curated by the Alibaba Cloud [AnalyticDB](https://www.alibabacloud.com/en/product/analyticdb-for-mysql) team following rigorous data quality assessment and thorough removal of anomalous data. The [homepage](https://safeload-project.github.io/SafeBench/) of SafeBench is now live. **The datasets can be downloaded [here](https://www.kaggle.com/datasets/onefanwu/safebench).**
+**SafeBench** is an industrial-grade benchmark open-sourced to advance academic research on preemptively identifying memory-overloading (MO) queries. SafeBench was curated by the Alibaba Cloud [AnalyticDB](https://www.alibabacloud.com/en/product/analyticdb-for-mysql) team following rigorous data quality assessment and thorough removal of anomalous data. The [homepage](https://safeload-project.github.io/SafeBench/) of SafeBench is now live. **The datasets can be downloaded [here](https://www.kaggle.com/datasets/onefanwu/safebench).**
 
 | Subset | \#(Queries) | \#(Clusters) | \#(Pos.) |    G1    |    G2    |
 |:------:|:-----------:|:------------:|:--------:|:---------:|:--------:|
@@ -7,16 +7,18 @@ SafeBench, an industrial-grade benchmark open-sourced to advance academic resear
 |   A2   |  50,856,068 |      862     |   2,508  |  testing | training |
 |   A3   |  48,821,677 |      856     |   2,331  |          |  testing |
 
-This table outlines the specifications of SafeBench, which is constructed from real-world production data collected from Alibaba Cloud's data warehouse AnalyticDB. The dataset spans three continuous days, forming three distinct subsets: SafeBench A1 (Day 1), A2 (Day 2), and A3 (Day 3). These subsets include over 150 million analytical queries executed across more than 800 production database clusters. The average CPU time per query is 7.9 seconds (A1), 8.6 seconds (A2), and 8.6 seconds (A3), respectively. 
+This table outlines the specifications of SafeBench, which is constructed from real-world production data collected from Alibaba Cloud's data warehouse, AnalyticDB. The dataset spans three continuous days, forming three distinct subsets: SafeBench A1 (Day 1), A2 (Day 2), and A3 (Day 3). These subsets include over 150 million analytical queries executed across more than 800 production database clusters. The average CPU time per query is 7.9 seconds (A1), 8.6 seconds (A2), and 8.6 seconds (A3), respectively. 
 
 To assess the effectiveness of MO query detection methods, we divide the datasets into two evaluation groups.
 Group G1 uses A1 for training and A2 for testing, while Group G2 uses A2 for training and A3 for testing. 
 By default, SafeBench uses the data from the previous day for training and the data from the current day for testing, reflecting the practical deployment setting in AnalyticDB where both models and heuristic rules are updated on a daily basis. Of course, researchers are free to combine data from A1, A2, and A3 as training or testing sets according to their own experimental needs.
 
 ## Feature Group
-SafeBench provides detailed profiling for each query from both the query-level and the cluster-level perspectives. Each query is uniquely identified by a query ID with a submission timestamp, and is annotated with metadata such as cluster name, total CPU time, and a binary label indicating whether memory overload occurred. Each query is further represented by a 163-dimensional feature vector, comprising 147 query-level features and 16 cluster-level features. 
+SafeBench provides detailed profiling for each query from both the query-level and the cluster-level perspectives. Each query is uniquely identified by a query ID with a submission timestamp and is annotated with metadata such as cluster name, total CPU time, and a binary label indicating whether memory overload occurred. Each query is further represented by a 163-dimensional feature vector, comprising 147 query-level features and 16 cluster-level features. 
 
-A categorized summary of the features is provided in following table.
+The query-level features characterize structural and statistical aspects of query plans, including operator types, cardinalities, memory-intensive operators, and user-specified execution modes. The cluster-level features describe system-level context, such as resource utilization metrics, static hardware configurations, and historical memory overload signals. Notably, all eight cluster resource metrics are collected at a one-minute granularity, a design choice intended to minimize the monitoring overhead on the data warehouse system. For example, if a query is issued at 08:03:30, its corresponding cluster resource metrics are taken from the snapshot recorded at 08:03:00. These features offer a holistic view of query execution behaviors and system conditions, enabling robust detection and analysis of MO patterns. 
+
+A categorized summary of the features is provided in the following table.
 
 | Category      | Feature Group                    | Description                                                                                                                                                                                                                                                                                     | Count |
 |---------------|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----:|
@@ -170,8 +172,8 @@ The following table lists the features associated with each query in SafeBench, 
 | feature_126        | The number of runtimeScan nodes                                      |
 | feature_127        | The total number of INNER-type joins among all join nodes.                      |
 | feature_128        | The total number of FULL-type joins among all join nodes.                       |
-| feature_129        | The total number of LEFT-type joins among all join nodes. all join nodes.                       |
-| feature_130        | The total number of RIGHT-type joins among all join nodes. all join nodes.                      |
+| feature_129        | The total number of LEFT-type joins among all join nodes.                       |
+| feature_130        | The total number of RIGHT-type joins among all join nodes.                      |
 | feature_131        | The total number of join nodes with a REPLICATED distribution type.                 |
 | feature_132        | The total number of join criteria across all join nodes.                |
 | feature_133        | The total number of output symbols of type VARCHAR across all join nodes. |
@@ -187,21 +189,21 @@ The following table lists the features associated with each query in SafeBench, 
 | feature_143        | The total number of orderBy keys across all window nodes.                        |
 | feature_144        | The total number of ordering directions across all window nodes.                 |
 | feature_145        | The total number of orderBy keys across all sort nodes.                         |
-| feature_146        | The number of queries processed per second by the db cluster.                                              |
-| feature_147        | The average utilization ratio of the general resource pool in the db cluster.                            |
-| feature_148        | The average utilization ratio of the system resource pool in the db cluster.                              |
-| feature_149        | The maximum observed utilization ratio of the general resource pool in the db cluster.                            |
-| feature_150        | The maximum observed utilization ratio of the system resource pool in the db cluster.                             |
-| feature_151        | The percentage of CPU resources currently utilized by the db cluster.                                 |
-| feature_152        | The percentage of memory resources currently utilized by the db cluster.                                  |
-| feature_153        | The average query response time, measured in milliseconds, for queries executed on the db cluster.                                  |
-| feature_154        | The total number of CPU cores allocated to the db cluster.                                |
-| feature_155        | The number of CPU cores dedicated for query execution within the db cluster.                             |
+| feature_146        | The number of queries processed per second by the DB cluster.                                              |
+| feature_147        | The average utilization ratio of the general resource pool in the DB cluster.                            |
+| feature_148        | The average utilization ratio of the system resource pool in the DB cluster.                              |
+| feature_149        | The maximum observed utilization ratio of the general resource pool in the DB cluster.                            |
+| feature_150        | The maximum observed utilization ratio of the system resource pool in the DB cluster.                             |
+| feature_151        | The percentage of CPU resources currently utilized by the DB cluster.                                 |
+| feature_152        | The percentage of memory resources currently utilized by the DB cluster.                                  |
+| feature_153        | The average query response time, measured in milliseconds, for queries executed on the DB cluster.                                  |
+| feature_154        | The total number of CPU cores allocated to the DB cluster.                                |
+| feature_155        | The number of CPU cores dedicated to query execution within the DB cluster.                             |
 | feature_156        | The number of CPU cores allocated to worker threads.                               |
-| feature_157        | The number of front-end nodes in the db cluster.                             |
-| feature_158        | The user-configured garbage collection level in the db cluster.                         |
+| feature_157        | The number of front-end nodes in the DB cluster.                             |
+| feature_158        | The user-configured garbage collection level in the DB cluster.                         |
 | feature_159        | The degree of query parallelism.                                               |
-| feature_160        | Resource group id of the db cluster.                                         |
+| feature_160        | Resource group ID of the DB cluster.                                         |
 | feature_161        | The number of Out-of-Memory (OOM) events that occurred in the database cluster associated with the query on the previous day.                                 |
 | feature_162        | Whether the query specifies batch execution mode.                             |
 
