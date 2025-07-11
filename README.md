@@ -1,5 +1,5 @@
 # SafeBench
-**SafeBench** is an industrial-grade benchmark open-sourced to advance academic research on preemptively identifying memory-overloading (MO) queries. SafeBench was curated by the Alibaba Cloud [AnalyticDB](https://www.alibabacloud.com/en/product/analyticdb-for-mysql) team following rigorous data quality assessment and thorough removal of anomalous data. The [homepage](https://safeload-project.github.io/SafeBench/) of SafeBench is now live. **The datasets can be downloaded [here](https://www.kaggle.com/datasets/onefanwu/safebench).**
+**SafeBench** is an industrial-grade benchmark open-sourced to advance academic research on preemptively identifying memory-overloading (MO) queries. SafeBench was curated by the Alibaba Cloud [AnalyticDB](https://www.alibabacloud.com/en/product/analyticdb-for-mysql) team following rigorous data quality assessment and thorough removal of anomalous data. The [homepage](https://safeload-project.github.io/Homepage/) of SafeBench is now live. **The datasets can be downloaded [here](https://www.kaggle.com/datasets/onefanwu/safebench).**
 
 | Subset | \#(Queries) | \#(Clusters) | \#(Pos.) |    G1    |    G2    |
 |:------:|:-----------:|:------------:|:--------:|:---------:|:--------:|
@@ -30,7 +30,7 @@ A categorized summary of the features is provided in the following table.
 | Cluster-level | Cluster Configuration            | Static configuration of the provisioned cluster, including the number of CPU cores and the resource group ID.                                                                                                                                                                                   |   6   |
 | Cluster-level | OOM Indicator                    | Number of OOM events observed in the corresponding cluster on the previous day.                                                                                                                                                                                                                 |   1   |
 
-# File Description
+## File Description
 The SafeBench datasets can be found [here](https://www.kaggle.com/datasets/onefanwu/safebench) at Kaggle. We take the three files from the A1 dataset as examples. The files **A1\_positive\_samples.parquet** and **A1\_negative\_samples.parquet** store the positive and negative samples, respectively, for the A1 dataset. Both Parquet files share an identical schema, comprising three columns: `processid_createtime`, `instance_name`, and `feat_vec`.
 
 The first two columns, `processid_createtime` and `instance_name`, are of **string type**. `processid_createtime` serves as a query identifier, while `instance_name` denotes the database cluster name. The third column, `feat_vec`, is a **float array** that holds a 163-dimensional feature vector. It is noteworthy that the latter part of the `processid_createtime` string, following the hyphen (`-`), represents the timestamp when the query occurred.
@@ -43,7 +43,7 @@ The following table lists the features associated with each query in SafeBench, 
 
 | Feature Identifier | Description                                               |
 |--------------------|-----------------------------------------------------------|
-| feature_0          | The number of aggregation nodes                                     |
+| feature_0          | The number of aggregation nodes.                                     |
 | feature_1          | The total estimated number of input rows across all aggregation nodes.                      |
 | feature_2          | The maximum estimated number of input rows across all aggregation nodes.                    |
 | feature_3 | The total estimated number of output rows across all aggregation nodes. |
@@ -70,7 +70,7 @@ The following table lists the features associated with each query in SafeBench, 
 | feature_24 | The maximum estimated input size across all join nodes. |
 | feature_25 | The total estimated output size across all join nodes. |
 | feature_26 | The maximum estimated output size across all join nodes. |
-| feature_27         | The number of remoteSource nodes                                     |
+| feature_27         | The number of remoteSource nodes.                                     |
 | feature_28         | The total estimated number of input rows across all remoteSource nodes.                      |
 | feature_29 | The maximum estimated number of input rows across all remoteSource nodes. |
 | feature_30 | The total estimated number of output rows across all remoteSource nodes. |
@@ -79,7 +79,7 @@ The following table lists the features associated with each query in SafeBench, 
 | feature_33 | The maximum estimated input size across all remoteSource nodes. |
 | feature_34 | The total estimated output size across all remoteSource nodes. |
 | feature_35 | The maximum estimated output size across all remoteSource nodes. |
-| feature_36         | The number of tablecommit nodes                                      |
+| feature_36         | The number of tablecommit nodes.                                      |
 | feature_37         | The total estimated number of input rows across all  tablecommit nodes.                     |
 | feature_38 | The maximum estimated number of input rows across all tablecommit nodes. |
 | feature_39 | The total estimated number of output rows across all tablecommit nodes. |
@@ -88,7 +88,7 @@ The following table lists the features associated with each query in SafeBench, 
 | feature_42 | The maximum estimated input size across all tablecommit nodes. |
 | feature_43 | The total estimated output size across all tablecommit nodes. |
 | feature_44 | The maximum estimated output size across all tablecommit nodes. |
-| feature_45         | The number of tablescan nodes                                        |
+| feature_45         | The number of tablescan nodes.                                        |
 | feature_46         | The total estimated number of input rows across all tablescan nodes.                        |
 | feature_47 | The maximum estimated number of input rows across all tablescan nodes. |
 | feature_48 | The total estimated number of output rows across all tablescan nodes. |
@@ -160,16 +160,16 @@ The following table lists the features associated with each query in SafeBench, 
 | feature_114 | The maximum estimated input size across all sort nodes. |
 | feature_115 | The total estimated output size across all sort nodes. |
 | feature_116 | The maximum estimated output size across all sort nodes. |
-| feature_117        | The number of filter nodes                                           |
-| feature_118        | The number of output nodes                                           |
-| feature_119        | The number of project nodes                                          |
-| feature_120        | The number of sipConsumer nodes                                      |
-| feature_121        | The number of sipProducer nodes                                      |
-| feature_122        | The number of scalar nodes                                           |
-| feature_123        | The number of runtimeCollect nodes                                   |
-| feature_124        | The number of runtimeFilter nodes                                    |
-| feature_125        | The number of values nodes                                           |
-| feature_126        | The number of runtimeScan nodes                                      |
+| feature_117        | The number of filter nodes.                                           |
+| feature_118        | The number of output nodes.                                           |
+| feature_119        | The number of project nodes.                                          |
+| feature_120        | The number of sipConsumer nodes.                                      |
+| feature_121        | The number of sipProducer nodes.                                      |
+| feature_122        | The number of scalar nodes.                                           |
+| feature_123        | The number of runtimeCollect nodes.                                   |
+| feature_124        | The number of runtimeFilter nodes.                                    |
+| feature_125        | The number of values nodes.                                           |
+| feature_126        | The number of runtimeScan nodes.                                      |
 | feature_127        | The total number of INNER-type joins among all join nodes.                      |
 | feature_128        | The total number of FULL-type joins among all join nodes.                       |
 | feature_129        | The total number of LEFT-type joins among all join nodes.                       |
