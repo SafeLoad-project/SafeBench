@@ -2,15 +2,15 @@
     <h3 align="center">SafeBench</h3>
     <p align="center">An industrial-grade benchmark of identifying memory-overloading queries.</p>
     <p align="center">
-        <a href="https://safeload-project.github.io/Homepage/">Homepage</a> •
-        <a href="https://www.kaggle.com/datasets/onefanwu/safebench">Datasets</a> •
-        <a href="https://safeload-project.github.io/Homepage/#/query-features">Query Features</a> •
-        <a href="https://safeload-project.github.io/Homepage/#/rule-library">Rule Library</a>
+        <a href="https://safeload-project.github.io/Homepage/">🏠 Homepage</a> •
+        <a href="https://www.kaggle.com/datasets/onefanwu/safebench">📊 Datasets</a> •
+        <a href="https://safeload-project.github.io/Homepage/#/query-features">🧩 Query Features</a> •
+        <a href="https://safeload-project.github.io/Homepage/#/rule-library">📚 Rule Library</a>
     </p>
 </p>
 
 
-## Introduction
+## 🚀 Introduction
 **SafeBench** is an industrial-grade benchmark open-sourced to advance academic research on preemptively identifying memory-overloading (MO) queries. SafeBench was curated by the Alibaba Cloud [AnalyticDB](https://www.alibabacloud.com/en/product/analyticdb-for-mysql) team following rigorous data quality assessment and thorough removal of anomalous data. The [homepage](https://safeload-project.github.io/Homepage/) of SafeBench is now live. **The datasets can be downloaded [here](https://www.kaggle.com/datasets/onefanwu/safebench).**
 
 | Subset | \#(Queries) | \#(Clusters) | \#(Pos.) |    G1    |    G2    |
@@ -25,24 +25,24 @@ To assess the effectiveness of MO query detection methods, we divide the dataset
 Group G1 uses A1 for training and A2 for testing, while Group G2 uses A2 for training and A3 for testing. 
 By default, SafeBench uses the data from the previous day for training and the data from the current day for testing, reflecting the practical deployment setting in AnalyticDB where both models and heuristic rules are updated on a daily basis. Of course, researchers are free to combine data from A1, A2, and A3 as training or testing sets according to their own experimental needs.
 
-## Feature Group
+## 🧬 Feature Group
 SafeBench provides detailed profiling for each query from both the query-level and the cluster-level perspectives. Each query is uniquely identified by a query ID with a submission timestamp and is annotated with metadata such as cluster name, total CPU time, and a binary label indicating whether memory overload occurred. Each query is further represented by a 163-dimensional feature vector, comprising 147 query-level features and 16 cluster-level features. 
 
 The query-level features characterize structural and statistical aspects of query plans, including operator types, cardinalities, memory-intensive operators, and user-specified execution modes. The cluster-level features describe system-level context, such as resource utilization metrics, static hardware configurations, and historical memory overload signals. Notably, all eight cluster resource metrics are collected at a one-minute granularity, a design choice intended to minimize the monitoring overhead on the data warehouse system. For example, if a query is issued at 08:03:30, its corresponding cluster resource metrics are taken from the snapshot recorded at 08:03:00. These features offer a holistic view of query execution behaviors and system conditions, enabling robust detection and analysis of MO patterns. 
 
 A categorized summary of the features is provided in the following table.
 
-| Category      | Feature Group                    | Description                                                                                                                                                                                                                                                                                     | Count |
+| <b/>Category</b>      | <b/>Feature Group</b>                    | <b/>Description</b>                                                                                                                                                                                                                                                                                     | <b/>Count</b> |
 |---------------|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----:|
-| Query-level   | Operator Count                   | Number of distinct operators (23 types in total), such as the count of join nodes in the query.                                                                                                                                                                                        |   23  |
-| Query-level   | Operator  Cardinality    | Cardinality statistics for 13 operators, covering 8 metrics per operator, including total and maximum values of the output size and row count. These operators are selected based on error reports from MO queries.                                                                             |  104  |
-| Query-level   | Memory-intensive Operators       | Fine-grained features of operators typically associated with high memory usage (i.e., join, aggregation, window, sort); includes child node cardinality for join and total number of varchar-typed grouping keys in aggregation. |   19  |
-| Query-level   | Execution  Configuration | Configuration information during query execution scheduling, including the total degree of query parallelism and an indicator of whether the SQL query explicitly specifies an execution mode (e.g., batch mode), which may impact memory behavior.                                    |   2   |
-| Cluster-level | Resource Metrics                 | Cluster resource usage metrics collected at 1-minute granularity, including QPS, average memory pool utilization, and CPU utilization.                                                                                                                                                          |   8   |
-| Cluster-level | Cluster Configuration            | Static configuration of the provisioned cluster, including the number of CPU cores and the resource group ID.                                                                                                                                                                                   |   6   |
-| Cluster-level | OOM Indicator                    | Number of OOM events observed in the corresponding cluster on the previous day.                                                                                                                                                                                                                 |   1   |
+| 🟦 Query-level   | Operator Count                   | Number of distinct operators (23 types in total), such as the count of join nodes in the query.                                                                                                                                                                                        |   23  |
+| 🟦 Query-level   | Operator  Cardinality    | Cardinality statistics for 13 operators, covering 8 metrics per operator, including total and maximum values of the output size and row count. These operators are selected based on error reports from MO queries.                                                                             |  104  |
+| 🟦 Query-level   | Memory-intensive Operators       | Fine-grained features of operators typically associated with high memory usage (i.e., join, aggregation, window, sort); includes child node cardinality for join and total number of varchar-typed grouping keys in aggregation. |   19  |
+| 🟦 Query-level   | Execution  Configuration | Configuration information during query execution scheduling, including the total degree of query parallelism and an indicator of whether the SQL query explicitly specifies an execution mode (e.g., batch mode), which may impact memory behavior.                                    |   2   |
+| 🟩 Cluster-level | Resource Metrics                 | Cluster resource usage metrics collected at 1-minute granularity, including QPS, average memory pool utilization, and CPU utilization.                                                                                                                                                          |   8   |
+| 🟩 Cluster-level | Cluster Configuration            | Static configuration of the provisioned cluster, including the number of CPU cores and the resource group ID.                                                                                                                                                                                   |   6   |
+| 🟩 Cluster-level | OOM Indicator                    | Number of OOM events observed in the corresponding cluster on the previous day.                                                                                                                                                                                                                 |   1   |
 
-## File Description
+## 📁 File Description
 The SafeBench datasets can be found [here](https://www.kaggle.com/datasets/onefanwu/safebench) at Kaggle. We take the three files from the A1 dataset as examples. The files **A1\_positive\_samples.parquet** and **A1\_negative\_samples.parquet** store the positive and negative samples, respectively, for the A1 dataset. Both Parquet files share an identical schema, comprising three columns: `processid_createtime`, `instance_name`, and `feat_vec`.
 
 The first two columns, `processid_createtime` and `instance_name`, are of **string type**. `processid_createtime` serves as a query identifier, while `instance_name` denotes the database cluster name. The third column, `feat_vec`, is a **float array** that holds a 163-dimensional feature vector. It is noteworthy that the latter part of the `processid_createtime` string, following the hyphen (`-`), represents the timestamp when the query occurred.
@@ -50,10 +50,10 @@ The first two columns, `processid_createtime` and `instance_name`, are of **stri
 The file **A1\_cputime.parquet** contains the actual total CPU time consumed by each query. This file has two columns: `processid_createtime` and `wall_time`. The `processid_createtime` column serves as the query identifier, while `wall_time` represents the CPU time consumed by the respective query.
 
 
-## Feature Identifiers and Description
+## 🏷️ Feature Identifiers and Description
 The following table lists the features associated with each query in SafeBench, along with their identifiers and descriptions.
 
-| Feature Identifier | Description                                               |
+| <b>Feature Identifier</b> | <b>Description</b>                                               |
 |--------------------|-----------------------------------------------------------|
 | feature_0          | The number of aggregation nodes.                                     |
 | feature_1          | The total estimated number of input rows across all aggregation nodes.                      |
@@ -219,8 +219,8 @@ The following table lists the features associated with each query in SafeBench, 
 | feature_161        | The number of Out-of-Memory (OOM) events that occurred in the database cluster associated with the query on the previous day.                                 |
 | feature_162        | Whether the query specifies batch execution mode.                             |
 
-## Rule Library
+## 📚 Rule Library
 Please refer to [rule library](https://github.com/SafeLoad-project/SafeBench/blob/main/rule_library.txt) for more details.
 
-## Copyright
+## 📝 License
 SafeBench is released under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). This license permits non-commercial use, distribution, and reproduction in any medium, provided the original author(s) and source are credited. For detailed terms, please refer to the [CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/) deed.
