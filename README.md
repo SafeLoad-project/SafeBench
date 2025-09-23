@@ -213,7 +213,7 @@ The following table lists the features associated with each query in SafeBench, 
 | feature_155        | The number of CPU cores dedicated to query execution within the DB cluster.                             |
 | feature_156        | The number of CPU cores allocated to worker threads.                               |
 | feature_157        | The number of front-end nodes in the DB cluster.                             |
-| feature_158        | The user-configured garbage collection level in the DB cluster.                         |
+| feature_158        | The user scale level in the DB cluster.                         |
 | feature_159        | The degree of query parallelism.                                               |
 | feature_160        | Resource group ID of the DB cluster.                                         |
 | feature_161        | The number of Out-of-Memory (OOM) events that occurred in the database cluster associated with the query on the previous day.                                 |
