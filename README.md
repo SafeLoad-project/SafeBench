@@ -43,181 +43,183 @@ A categorized summary of the features is provided in the following table.
 | 🟩 Cluster-level | OOM Indicator                    | Number of OOM events observed in the corresponding cluster on the previous day.                                                                                                                                                                                                                 |   1   |
 
 ## 📁 File Description
-The SafeBench datasets can be found [here](https://www.kaggle.com/datasets/onefanwu/safebench) at Kaggle. We take the three files from the A1 dataset as examples. The files **A1\_positive\_samples.parquet** and **A1\_negative\_samples.parquet** store the positive and negative samples, respectively, for the A1 dataset. Both Parquet files share an identical schema, comprising three columns: `processid_createtime`, `instance_name`, and `feat_vec`.
+The SafeBench datasets can be found [here](https://www.kaggle.com/datasets/onefanwu/safebench) at Kaggle. We take the three files from the A1 dataset as examples. The files **A1\_positive\_samples.parquet** and **A1\_negative\_samples.parquet** store the positive and negative samples, respectively, for the A1 dataset. Both Parquet files share an identical schema, comprising three columns: `processid_createtime`, `cluster_name`, and `feat_vec`.
 
-The first two columns, `processid_createtime` and `instance_name`, are of **string type**. `processid_createtime` serves as a query identifier, while `instance_name` denotes the database cluster name. The third column, `feat_vec`, is a **float array** that holds a 163-dimensional feature vector. It is noteworthy that the latter part of the `processid_createtime` string, following the hyphen (`-`), represents the timestamp when the query occurred.
+The first two columns, `processid_createtime` and `cluster_name`, are of **string type**. `processid_createtime` serves as a query identifier, while `cluster_name` denotes the database cluster name. The third column, `feat_vec`, is a **float array** that holds a 163-dimensional feature vector. It is noteworthy that the latter part of the `processid_createtime` string, following the hyphen (`-`), represents the timestamp when the query occurred.
 
 The file **A1\_cputime.parquet** contains the actual total CPU time consumed by each query. This file has two columns: `processid_createtime` and `wall_time`. The `processid_createtime` column serves as the query identifier, while `wall_time` represents the CPU time consumed by the respective query.
 
 
 ## 🏷️ Feature Identifiers and Description
-The following table lists the features associated with each query in SafeBench, along with their identifiers and descriptions.
+The following table lists the features associated with each query in SafeBench, along with their identifiers and descriptions. All these features have corresponding query plan node types and metrics in both Snowflake and Amazon Redshift. For detailed documentation, please refer to:
+- **Snowflake**: [Query Profile Documentation](https://docs.snowflake.com/en/user-guide/ui-query-profile) and [GET_QUERY_OPERATOR_STATS](https://docs.snowflake.com/en/sql-reference/functions/get_query_operator_stats)
+- **Amazon Redshift**: [Query Plan Documentation](https://docs.aws.amazon.com/redshift/latest/dg/c-the-query-plan.html) and [EXPLAIN Operators](https://docs.aws.amazon.com/prescriptive-guidance/latest/query-lifecycle-redshift/explain-operators.html)
 
-| <b>Feature Identifier</b> | <b>Description</b>                                               |
-|--------------------|-----------------------------------------------------------|
-| feature_0          | The number of aggregation nodes.                                     |
-| feature_1          | The total estimated number of input rows across all aggregation nodes.                      |
-| feature_2          | The maximum estimated number of input rows across all aggregation nodes.                    |
-| feature_3 | The total estimated number of output rows across all aggregation nodes. |
-| feature_4 | The maximum estimated number of output rows across all aggregation nodes. |
-| feature_5 | The total estimated input size across all aggregation nodes. |
-| feature_6 | The maximum estimated input size across all aggregation nodes. |
-| feature_7 | The total estimated output size across all aggregation nodes. |
-| feature_8 | The maximum estimated output size across all aggregation nodes. |
-| feature_9          | The number of exchange nodes.                                         |
-| feature_10         | The total estimated number of input rows across all exchange nodes.                          |
-| feature_11 | The maximum estimated number of input rows across all exchange nodes. |
-| feature_12 | The total estimated number of output rows across all exchange nodes. |
-| feature_13 | The maximum estimated number of output rows across all exchange nodes. |
-| feature_14 | The total estimated input size across all exchange nodes. |
-| feature_15 | The maximum estimated input size across all exchange nodes. |
-| feature_16 | The total estimated output size across all exchange nodes. |
-| feature_17 | The maximum estimated output size across all exchange nodes. |
-| feature_18         | The number of join nodes.                                             |
-| feature_19         | The total estimated number of input rows across all join nodes.                             |
-| feature_20 | The maximum estimated number of input rows across all join nodes. |
-| feature_21 | The total estimated number of output rows across all join nodes. |
-| feature_22 | The maximum estimated number of output rows across all join nodes. |
-| feature_23 | The total estimated input size across all join nodes. |
-| feature_24 | The maximum estimated input size across all join nodes. |
-| feature_25 | The total estimated output size across all join nodes. |
-| feature_26 | The maximum estimated output size across all join nodes. |
-| feature_27         | The number of remoteSource nodes.                                     |
-| feature_28         | The total estimated number of input rows across all remoteSource nodes.                      |
-| feature_29 | The maximum estimated number of input rows across all remoteSource nodes. |
-| feature_30 | The total estimated number of output rows across all remoteSource nodes. |
-| feature_31 | The maximum estimated number of output rows across all remoteSource nodes. |
-| feature_32 | The total estimated input size across all remoteSource nodes. |
-| feature_33 | The maximum estimated input size across all remoteSource nodes. |
-| feature_34 | The total estimated output size across all remoteSource nodes. |
-| feature_35 | The maximum estimated output size across all remoteSource nodes. |
-| feature_36         | The number of tablecommit nodes.                                      |
-| feature_37         | The total estimated number of input rows across all  tablecommit nodes.                     |
-| feature_38 | The maximum estimated number of input rows across all tablecommit nodes. |
-| feature_39 | The total estimated number of output rows across all tablecommit nodes. |
-| feature_40 | The maximum estimated number of output rows across all tablecommit nodes. |
-| feature_41 | The total estimated input size across all tablecommit nodes. |
-| feature_42 | The maximum estimated input size across all tablecommit nodes. |
-| feature_43 | The total estimated output size across all tablecommit nodes. |
-| feature_44 | The maximum estimated output size across all tablecommit nodes. |
-| feature_45         | The number of tablescan nodes.                                        |
-| feature_46         | The total estimated number of input rows across all tablescan nodes.                        |
-| feature_47 | The maximum estimated number of input rows across all tablescan nodes. |
-| feature_48 | The total estimated number of output rows across all tablescan nodes. |
-| feature_49 | The maximum estimated number of output rows across all tablescan nodes. |
-| feature_50 | The total estimated input size across all tablescan nodes. |
-| feature_51 | The maximum estimated input size across all tablescan nodes. |
-| feature_52 | The total estimated output size across all tablescan nodes. |
-| feature_53 | The maximum estimated output size across all tablescan nodes. |
-| feature_54 | The number of tablewriter nodes. |
-| feature_55 | The total estimated number of input rows across all tablewriter nodes. |
-| feature_56 | The maximum estimated number of input rows across all tablewriter nodes. |
-| feature_57 | The total estimated number of output rows across all tablewriter nodes. |
-| feature_58 | The maximum estimated number of output rows across all tablewriter nodes. |
-| feature_59 | The total estimated input size across all tablewriter nodes. |
-| feature_60 | The maximum estimated input size across all tablewriter nodes. |
-| feature_61 | The total estimated output size across all tablewriter nodes. |
-| feature_62 | The maximum estimated output size across all tablewriter nodes. |
-| feature_63 | The number of window nodes. |
-| feature_64 | The total estimated number of input rows across all window nodes. |
-| feature_65 | The maximum estimated number of input rows across all window nodes. |
-| feature_66 | The total estimated number of output rows across all window nodes. |
-| feature_67 | The maximum estimated number of output rows across all window nodes. |
-| feature_68 | The total estimated input size across all window nodes. |
-| feature_69 | The maximum estimated input size across all window nodes. |
-| feature_70 | The total estimated output size across all window nodes. |
-| feature_71 | The maximum estimated output size across all window nodes. |
-| feature_72 | The number of markDistinct nodes. |
-| feature_73 | The total estimated number of input rows across all markDistinct nodes. |
-| feature_74 | The maximum estimated number of input rows across all markDistinct nodes. |
-| feature_75 | The total estimated number of output rows across all markDistinct nodes. |
-| feature_76 | The maximum estimated number of output rows across all markDistinct nodes. |
-| feature_77 | The total estimated input size across all markDistinct nodes. |
-| feature_78 | The maximum estimated input size across all markDistinct nodes. |
-| feature_79 | The total estimated output size across all markDistinct nodes. |
-| feature_80 | The maximum estimated output size across all markDistinct nodes. |
-| feature_81 | The number of topn nodes. |
-| feature_82 | The total estimated number of input rows across all topn nodes. |
-| feature_83 | The maximum estimated number of input rows across all topn nodes. |
-| feature_84 | The total estimated number of output rows across all topn nodes. |
-| feature_85 | The maximum estimated number of output rows across all topn nodes. |
-| feature_86 | The total estimated input size across all topn nodes. |
-| feature_87 | The maximum estimated input size across all topn nodes. |
-| feature_88 | The total estimated output size across all topn nodes. |
-| feature_89 | The maximum estimated output size across all topn nodes. |
-| feature_90 | The number of limit nodes. |
-| feature_91 | The total estimated number of input rows across all limit nodes. |
-| feature_92 | The maximum estimated number of input rows across all limit nodes. |
-| feature_93 | The total estimated number of output rows across all limit nodes. |
-| feature_94 | The maximum estimated number of output rows across all limit nodes. |
-| feature_95 | The total estimated input size across all limit nodes. |
-| feature_96 | The maximum estimated input size across all limit nodes. |
-| feature_97 | The total estimated output size across all limit nodes. |
-| feature_98 | The maximum estimated output size across all limit nodes. |
-| feature_99 | The number of topnRowNumber nodes. |
-| feature_100 | The total estimated number of input rows across all topnRowNumber nodes. |
-| feature_101 | The maximum estimated number of input rows across all topnRowNumber nodes. |
-| feature_102 | The total estimated number of output rows across all topnRowNumber nodes. |
-| feature_103 | The maximum estimated number of output rows across all topnRowNumber nodes. |
-| feature_104 | The total estimated input size across all topnRowNumber nodes. |
-| feature_105 | The maximum estimated input size across all topnRowNumber nodes. |
-| feature_106 | The total estimated output size across all topnRowNumber nodes. |
-| feature_107 | The maximum estimated output size across all topnRowNumber nodes. |
-| feature_108 | The number of sort nodes. |
-| feature_109 | The total estimated number of input rows across all sort nodes. |
-| feature_110 | The maximum estimated number of input rows across all sort nodes. |
-| feature_111 | The total estimated number of output rows across all sort nodes. |
-| feature_112 | The maximum estimated number of output rows across all sort nodes. |
-| feature_113 | The total estimated input size across all sort nodes. |
-| feature_114 | The maximum estimated input size across all sort nodes. |
-| feature_115 | The total estimated output size across all sort nodes. |
-| feature_116 | The maximum estimated output size across all sort nodes. |
-| feature_117        | The number of filter nodes.                                           |
-| feature_118        | The number of output nodes.                                           |
-| feature_119        | The number of project nodes.                                          |
-| feature_120        | The number of sipConsumer nodes.                                      |
-| feature_121        | The number of sipProducer nodes.                                      |
-| feature_122        | The number of scalar nodes.                                           |
-| feature_123        | The number of runtimeCollect nodes.                                   |
-| feature_124        | The number of runtimeFilter nodes.                                    |
-| feature_125        | The number of values nodes.                                           |
-| feature_126        | The number of runtimeScan nodes.                                      |
-| feature_127        | The total number of INNER-type joins among all join nodes.                      |
-| feature_128        | The total number of FULL-type joins among all join nodes.                       |
-| feature_129        | The total number of LEFT-type joins among all join nodes.                       |
-| feature_130        | The total number of RIGHT-type joins among all join nodes.                      |
-| feature_131        | The total number of join nodes with a REPLICATED distribution type.                 |
-| feature_132        | The total number of join criteria across all join nodes.                |
-| feature_133        | The total number of output symbols of type VARCHAR across all join nodes. |
-| feature_134        | The total number of join keys with data type VARCHAR in the join conditions across all join nodes.      |
-| feature_135        | The total number of output symbols across all join nodes.                      |
-| feature_136        | The total estimated output size of the left child nodes across all join nodes.                    |
-| feature_137        | The total estimated output size of the right child nodes across all join nodes.                    |
-| feature_138        | The total number of grouping keys across all aggregation nodes.                |
-| feature_139        | The total sum of grouping-set count across all aggregation nodes.                |
-| feature_140        | The total number of grouping keys of type VARCHAR across all aggregation nodes. |
-| feature_141        | The total number of aggregation nodes with step type PARTIAL.             |
-| feature_142        | The total number of partitionBy keys across all window nodes.                    |
-| feature_143        | The total number of orderBy keys across all window nodes.                        |
-| feature_144        | The total number of ordering directions across all window nodes.                 |
-| feature_145        | The total number of orderBy keys across all sort nodes.                         |
-| feature_146        | The number of queries processed per second by the DB cluster.                                              |
-| feature_147        | The average utilization ratio of the general resource pool in the DB cluster.                            |
-| feature_148        | The average utilization ratio of the system resource pool in the DB cluster.                              |
-| feature_149        | The maximum observed utilization ratio of the general resource pool in the DB cluster.                            |
-| feature_150        | The maximum observed utilization ratio of the system resource pool in the DB cluster.                             |
-| feature_151        | The percentage of CPU resources currently utilized by the DB cluster.                                 |
-| feature_152        | The percentage of memory resources currently utilized by the DB cluster.                                  |
-| feature_153        | The average query response time, measured in milliseconds, for queries executed on the DB cluster.                                  |
-| feature_154        | The total number of CPU cores allocated to the DB cluster.                                |
-| feature_155        | The number of CPU cores dedicated to query execution within the DB cluster.                             |
-| feature_156        | The number of CPU cores allocated to worker threads.                               |
-| feature_157        | The number of front-end nodes in the DB cluster.                             |
-| feature_158        | The user scale level in the DB cluster.                         |
-| feature_159        | The degree of query parallelism.                                               |
-| feature_160        | Resource group ID of the DB cluster.                                         |
-| feature_161        | The number of Out-of-Memory (OOM) events that occurred in the database cluster associated with the query on the previous day.                                 |
-| feature_162        | Whether the query specifies batch execution mode.                             |
+| <b>Feature Identifier</b> | <b>Description</b> | <b>Snowflake & Redshift Equivalents</b> |
+|--------------------|-----------------------------------------------------------|-----------------------------------------------------------|
+| feature_0          | The number of aggregation nodes.                                     | **Snowflake**: Aggregate<br>**Redshift**: Aggregate/HashAggregate/GroupAggregate |
+| feature_1          | The total estimated number of input rows across all aggregation nodes.                      | Same metrics available in both systems' Aggregate operators |
+| feature_2          | The maximum estimated number of input rows across all aggregation nodes.                    | Same metrics available in both systems' Aggregate operators |
+| feature_3 | The total estimated number of output rows across all aggregation nodes. | Same metrics available in both systems' Aggregate operators |
+| feature_4 | The maximum estimated number of output rows across all aggregation nodes. | Same metrics available in both systems' Aggregate operators |
+| feature_5 | The total estimated input size across all aggregation nodes. | Same metrics available in both systems' Aggregate operators |
+| feature_6 | The maximum estimated input size across all aggregation nodes. | Same metrics available in both systems' Aggregate operators |
+| feature_7 | The total estimated output size across all aggregation nodes. | Same metrics available in both systems' Aggregate operators |
+| feature_8 | The maximum estimated output size across all aggregation nodes. | Same metrics available in both systems' Aggregate operators |
+| feature_9          | The number of exchange nodes.                                         | **Snowflake**: Exchange<br>**Redshift**: Data redistribution (DS_DIST_*, DS_BCAST_*) |
+| feature_10         | The total estimated number of input rows across all exchange nodes.                          | Same metrics available in both systems' exchange/redistribution operators |
+| feature_11 | The maximum estimated number of input rows across all exchange nodes. | Same metrics available in both systems' exchange/redistribution operators |
+| feature_12 | The total estimated number of output rows across all exchange nodes. | Same metrics available in both systems' exchange/redistribution operators |
+| feature_13 | The maximum estimated number of output rows across all exchange nodes. | Same metrics available in both systems' exchange/redistribution operators |
+| feature_14 | The total estimated input size across all exchange nodes. | Same metrics available in both systems' exchange/redistribution operators |
+| feature_15 | The maximum estimated input size across all exchange nodes. | Same metrics available in both systems' exchange/redistribution operators |
+| feature_16 | The total estimated output size across all exchange nodes. | Same metrics available in both systems' exchange/redistribution operators |
+| feature_17 | The maximum estimated output size across all exchange nodes. | Same metrics available in both systems' exchange/redistribution operators |
+| feature_18         | The number of join nodes.                                             | **Snowflake**: Join<br>**Redshift**: Hash Join/Merge Join/Nested Loop |
+| feature_19         | The total estimated number of input rows across all join nodes.                             | Same metrics available in both systems' join operators |
+| feature_20 | The maximum estimated number of input rows across all join nodes. | Same metrics available in both systems' join operators |
+| feature_21 | The total estimated number of output rows across all join nodes. | Same metrics available in both systems' join operators |
+| feature_22 | The maximum estimated number of output rows across all join nodes. | Same metrics available in both systems' join operators |
+| feature_23 | The total estimated input size across all join nodes. | Same metrics available in both systems' join operators |
+| feature_24 | The maximum estimated input size across all join nodes. | Same metrics available in both systems' join operators |
+| feature_25 | The total estimated output size across all join nodes. | Same metrics available in both systems' join operators |
+| feature_26 | The maximum estimated output size across all join nodes. | Same metrics available in both systems' join operators |
+| feature_27         | The number of remoteSource nodes.                                     | **Snowflake**: RemoteSource/External Functions<br>**Redshift**: S3 Seq Scan/Redshift Spectrum |
+| feature_28         | The total estimated number of input rows across all remoteSource nodes.                      | Same metrics available in both systems' remote/external operators |
+| feature_29 | The maximum estimated number of input rows across all remoteSource nodes. | Same metrics available in both systems' remote/external operators |
+| feature_30 | The total estimated number of output rows across all remoteSource nodes. | Same metrics available in both systems' remote/external operators |
+| feature_31 | The maximum estimated number of output rows across all remoteSource nodes. | Same metrics available in both systems' remote/external operators |
+| feature_32 | The total estimated input size across all remoteSource nodes. | Same metrics available in both systems' remote/external operators |
+| feature_33 | The maximum estimated input size across all remoteSource nodes. | Same metrics available in both systems' remote/external operators |
+| feature_34 | The total estimated output size across all remoteSource nodes. | Same metrics available in both systems' remote/external operators |
+| feature_35 | The maximum estimated output size across all remoteSource nodes. | Same metrics available in both systems' remote/external operators |
+| feature_36         | The number of tablecommit nodes.                                      | **Snowflake**: Insert/Update/Delete/Merge<br>**Redshift**: COMMIT operations |
+| feature_37         | The total estimated number of input rows across all  tablecommit nodes.                     | Same metrics available in both systems' DML operators |
+| feature_38 | The maximum estimated number of input rows across all tablecommit nodes. | Same metrics available in both systems' DML operators |
+| feature_39 | The total estimated number of output rows across all tablecommit nodes. | Same metrics available in both systems' DML operators |
+| feature_40 | The maximum estimated number of output rows across all tablecommit nodes. | Same metrics available in both systems' DML operators |
+| feature_41 | The total estimated input size across all tablecommit nodes. | Same metrics available in both systems' DML operators |
+| feature_42 | The maximum estimated input size across all tablecommit nodes. | Same metrics available in both systems' DML operators |
+| feature_43 | The total estimated output size across all tablecommit nodes. | Same metrics available in both systems' DML operators |
+| feature_44 | The maximum estimated output size across all tablecommit nodes. | Same metrics available in both systems' DML operators |
+| feature_45         | The number of tablescan nodes.                                        | **Snowflake**: TableScan<br>**Redshift**: Seq Scan |
+| feature_46         | The total estimated number of input rows across all tablescan nodes.                        | Same metrics available in both systems' scan operators |
+| feature_47 | The maximum estimated number of input rows across all tablescan nodes. | Same metrics available in both systems' scan operators |
+| feature_48 | The total estimated number of output rows across all tablescan nodes. | Same metrics available in both systems' scan operators |
+| feature_49 | The maximum estimated number of output rows across all tablescan nodes. | Same metrics available in both systems' scan operators |
+| feature_50 | The total estimated input size across all tablescan nodes. | Same metrics available in both systems' scan operators |
+| feature_51 | The maximum estimated input size across all tablescan nodes. | Same metrics available in both systems' scan operators |
+| feature_52 | The total estimated output size across all tablescan nodes. | Same metrics available in both systems' scan operators |
+| feature_53 | The maximum estimated output size across all tablescan nodes. | Same metrics available in both systems' scan operators |
+| feature_54 | The number of tablewriter nodes. | **Snowflake**: Insert/Copy<br>**Redshift**: Insert operations |
+| feature_55 | The total estimated number of input rows across all tablewriter nodes. | Same metrics available in both systems' write operators |
+| feature_56 | The maximum estimated number of input rows across all tablewriter nodes. | Same metrics available in both systems' write operators |
+| feature_57 | The total estimated number of output rows across all tablewriter nodes. | Same metrics available in both systems' write operators |
+| feature_58 | The maximum estimated number of output rows across all tablewriter nodes. | Same metrics available in both systems' write operators |
+| feature_59 | The total estimated input size across all tablewriter nodes. | Same metrics available in both systems' write operators |
+| feature_60 | The maximum estimated input size across all tablewriter nodes. | Same metrics available in both systems' write operators |
+| feature_61 | The total estimated output size across all tablewriter nodes. | Same metrics available in both systems' write operators |
+| feature_62 | The maximum estimated output size across all tablewriter nodes. | Same metrics available in both systems' write operators |
+| feature_63 | The number of window nodes. | **Snowflake**: WindowFunction<br>**Redshift**: Window functions |
+| feature_64 | The total estimated number of input rows across all window nodes. | Same metrics available in both systems' window operators |
+| feature_65 | The maximum estimated number of input rows across all window nodes. | Same metrics available in both systems' window operators |
+| feature_66 | The total estimated number of output rows across all window nodes. | Same metrics available in both systems' window operators |
+| feature_67 | The maximum estimated number of output rows across all window nodes. | Same metrics available in both systems' window operators |
+| feature_68 | The total estimated input size across all window nodes. | Same metrics available in both systems' window operators |
+| feature_69 | The maximum estimated input size across all window nodes. | Same metrics available in both systems' window operators |
+| feature_70 | The total estimated output size across all window nodes. | Same metrics available in both systems' window operators |
+| feature_71 | The maximum estimated output size across all window nodes. | Same metrics available in both systems' window operators |
+| feature_72 | The number of markDistinct nodes. | **Snowflake**: Aggregate with DISTINCT<br>**Redshift**: Unique operator |
+| feature_73 | The total estimated number of input rows across all markDistinct nodes. | Same metrics available in both systems' distinct operators |
+| feature_74 | The maximum estimated number of input rows across all markDistinct nodes. | Same metrics available in both systems' distinct operators |
+| feature_75 | The total estimated number of output rows across all markDistinct nodes. | Same metrics available in both systems' distinct operators |
+| feature_76 | The maximum estimated number of output rows across all markDistinct nodes. | Same metrics available in both systems' distinct operators |
+| feature_77 | The total estimated input size across all markDistinct nodes. | Same metrics available in both systems' distinct operators |
+| feature_78 | The maximum estimated input size across all markDistinct nodes. | Same metrics available in both systems' distinct operators |
+| feature_79 | The total estimated output size across all markDistinct nodes. | Same metrics available in both systems' distinct operators |
+| feature_80 | The maximum estimated output size across all markDistinct nodes. | Same metrics available in both systems' distinct operators |
+| feature_81 | The number of topn nodes. | **Snowflake**: TopN<br>**Redshift**: Sort + Limit |
+| feature_82 | The total estimated number of input rows across all topn nodes. | Same metrics available in both systems' top-N operators |
+| feature_83 | The maximum estimated number of input rows across all topn nodes. | Same metrics available in both systems' top-N operators |
+| feature_84 | The total estimated number of output rows across all topn nodes. | Same metrics available in both systems' top-N operators |
+| feature_85 | The maximum estimated number of output rows across all topn nodes. | Same metrics available in both systems' top-N operators |
+| feature_86 | The total estimated input size across all topn nodes. | Same metrics available in both systems' top-N operators |
+| feature_87 | The maximum estimated input size across all topn nodes. | Same metrics available in both systems' top-N operators |
+| feature_88 | The total estimated output size across all topn nodes. | Same metrics available in both systems' top-N operators |
+| feature_89 | The maximum estimated output size across all topn nodes. | Same metrics available in both systems' top-N operators |
+| feature_90 | The number of limit nodes. | **Snowflake**: Limit<br>**Redshift**: Limit |
+| feature_91 | The total estimated number of input rows across all limit nodes. | Same metrics available in both systems' limit operators |
+| feature_92 | The maximum estimated number of input rows across all limit nodes. | Same metrics available in both systems' limit operators |
+| feature_93 | The total estimated number of output rows across all limit nodes. | Same metrics available in both systems' limit operators |
+| feature_94 | The maximum estimated number of output rows across all limit nodes. | Same metrics available in both systems' limit operators |
+| feature_95 | The total estimated input size across all limit nodes. | Same metrics available in both systems' limit operators |
+| feature_96 | The maximum estimated input size across all limit nodes. | Same metrics available in both systems' limit operators |
+| feature_97 | The total estimated output size across all limit nodes. | Same metrics available in both systems' limit operators |
+| feature_98 | The maximum estimated output size across all limit nodes. | Same metrics available in both systems' limit operators |
+| feature_99 | The number of topnRowNumber nodes. | **Snowflake**: WindowFunction with ROW_NUMBER<br>**Redshift**: Window function with ROW_NUMBER |
+| feature_100 | The total estimated number of input rows across all topnRowNumber nodes. | Same metrics available in both systems' row number window operators |
+| feature_101 | The maximum estimated number of input rows across all topnRowNumber nodes. | Same metrics available in both systems' row number window operators |
+| feature_102 | The total estimated number of output rows across all topnRowNumber nodes. | Same metrics available in both systems' row number window operators |
+| feature_103 | The maximum estimated number of output rows across all topnRowNumber nodes. | Same metrics available in both systems' row number window operators |
+| feature_104 | The total estimated input size across all topnRowNumber nodes. | Same metrics available in both systems' row number window operators |
+| feature_105 | The maximum estimated input size across all topnRowNumber nodes. | Same metrics available in both systems' row number window operators |
+| feature_106 | The total estimated output size across all topnRowNumber nodes. | Same metrics available in both systems' row number window operators |
+| feature_107 | The maximum estimated output size across all topnRowNumber nodes. | Same metrics available in both systems' row number window operators |
+| feature_108 | The number of sort nodes. | **Snowflake**: Sort<br>**Redshift**: Sort |
+| feature_109 | The total estimated number of input rows across all sort nodes. | Same metrics available in both systems' sort operators |
+| feature_110 | The maximum estimated number of input rows across all sort nodes. | Same metrics available in both systems' sort operators |
+| feature_111 | The total estimated number of output rows across all sort nodes. | Same metrics available in both systems' sort operators |
+| feature_112 | The maximum estimated number of output rows across all sort nodes. | Same metrics available in both systems' sort operators |
+| feature_113 | The total estimated input size across all sort nodes. | Same metrics available in both systems' sort operators |
+| feature_114 | The maximum estimated input size across all sort nodes. | Same metrics available in both systems' sort operators |
+| feature_115 | The total estimated output size across all sort nodes. | Same metrics available in both systems' sort operators |
+| feature_116 | The maximum estimated output size across all sort nodes. | Same metrics available in both systems' sort operators |
+| feature_117        | The number of filter nodes.                                           | **Snowflake**: Filter<br>**Redshift**: Filter |
+| feature_118        | The number of output nodes.                                           | **Snowflake**: Result<br>**Redshift**: Result |
+| feature_119        | The number of project nodes.                                          | **Snowflake**: Project<br>**Redshift**: Project |
+| feature_120        | The number of sipConsumer nodes.                                      | **Snowflake**: Runtime Filter Consumer<br>**Redshift**: Runtime Filter Consumer |
+| feature_121        | The number of sipProducer nodes.                                      | **Snowflake**: Runtime Filter Producer<br>**Redshift**: Runtime Filter Producer |
+| feature_122        | The number of scalar nodes.                                           | **Snowflake**: Scalar functions<br>**Redshift**: Scalar functions |
+| feature_123        | The number of runtimeCollect nodes.                                   | **Snowflake**: Runtime Filter Collection<br>**Redshift**: Runtime Filter Collection |
+| feature_124        | The number of runtimeFilter nodes.                                    | **Snowflake**: JoinFilter<br>**Redshift**: Runtime filtering |
+| feature_125        | The number of values nodes.                                           | **Snowflake**: ValuesClause<br>**Redshift**: VALUES clause |
+| feature_126        | The number of runtimeScan nodes.                                      | Filtering Scan Operator |
+| feature_127        | The total number of INNER-type joins among all join nodes.                      | **Snowflake**: INNER join<br>**Redshift**: INNER join |
+| feature_128        | The total number of FULL-type joins among all join nodes.                       | **Snowflake**: FULL OUTER join<br>**Redshift**: FULL join |
+| feature_129        | The total number of LEFT-type joins among all join nodes.                       | **Snowflake**: LEFT OUTER join<br>**Redshift**: LEFT join |
+| feature_130        | The total number of RIGHT-type joins among all join nodes.                      | **Snowflake**: RIGHT OUTER join<br>**Redshift**: RIGHT join |
+| feature_131        | The total number of join nodes with a REPLICATED distribution type.                 | **Snowflake**: Broadcast join<br>**Redshift**: DS_BCAST_INNER |
+| feature_132        | The total number of join criteria across all join nodes.                | Join condition attributes available in both systems |
+| feature_133        | The total number of output symbols of type VARCHAR across all join nodes. | Data type information available in both systems' query plans |
+| feature_134        | The total number of join keys with data type VARCHAR in the join conditions across all join nodes.      | Join key data type information available in both systems |
+| feature_135        | The total number of output symbols across all join nodes.                      | Output column information available in both systems |
+| feature_136        | The total estimated output size of the left child nodes across all join nodes.                    | Child node statistics available in both systems |
+| feature_137        | The total estimated output size of the right child nodes across all join nodes.                    | Child node statistics available in both systems |
+| feature_138        | The total number of grouping keys across all aggregation nodes.                | **Snowflake**: GROUP BY keys<br>**Redshift**: GROUP BY keys |
+| feature_139        | The total sum of grouping-set count across all aggregation nodes.                | GROUPING SETS available in both systems |
+| feature_140        | The total number of grouping keys of type VARCHAR across all aggregation nodes. | Grouping key data type information available in both systems |
+| feature_141        | The total number of aggregation nodes with step type PARTIAL.             | **Snowflake**: Partial aggregation in distributed processing<br>**Redshift**: Partial aggregation steps in query plan |
+| feature_142        | The total number of partitionBy keys across all window nodes.                    | **Snowflake**: PARTITION BY<br>**Redshift**: PARTITION BY |
+| feature_143        | The total number of orderBy keys across all window nodes.                        | **Snowflake**: ORDER BY (window)<br>**Redshift**: ORDER BY (window) |
+| feature_144        | The total number of ordering directions across all window nodes.                 | ASC/DESC ordering available in both systems' window functions |
+| feature_145        | The total number of orderBy keys across all sort nodes.                         | **Snowflake**: ORDER BY (sort)<br>**Redshift**: ORDER BY (sort) |
+| feature_146        | The number of queries processed per second by the DB cluster.                                              | **Snowflake**: Query load metrics<br>**Redshift**: Query throughput metrics |
+| feature_147        | The average utilization ratio of the general memory pool in the DB cluster.                            |  Same metrics available in both systems|
+| feature_148        | The average utilization ratio of the system memory pool in the DB cluster.                              | Same metrics available in both systems |
+| feature_149        | The maximum observed utilization ratio of the general memory pool in the DB cluster.                            | Mame metrics available in both systems |
+| feature_150        | The maximum observed utilization ratio of the system memory pool in the DB cluster.                             | Same metrics available in both systems |
+| feature_151        | The percentage of CPU resources currently utilized by the DB cluster.                                 | Same metrics available in both systems |
+| feature_152        | The percentage of memory resources currently utilized by the DB cluster.                                  | Same metrics available in both systems |
+| feature_153        | The average query response time, measured in milliseconds, for queries executed on the DB cluster.                                  |Same metrics available in both systems |
+| feature_154        | The total number of CPU cores allocated to the DB cluster.                                | Same metrics available in both systems |
+| feature_155        | The number of CPU cores dedicated to query execution within the DB cluster.                             | Same metrics available in both systems |
+| feature_156        | The number of CPU cores allocated to worker threads.                               | Same metrics available in both systems |
+| feature_157        | The number of front-end nodes in the DB cluster.                             | **Snowflake**: Virtual warehouse nodes<br>**Redshift**: Leader and compute nodes |
+| feature_158        | The scale level in the DB cluster.                         | Same metrics available in both systems |
+| feature_159        | The degree of query parallelism.                                               | **Snowflake**: Query parallelism<br>**Redshift**: Query parallelism/slices |
+| feature_160        | Resource group ID of the DB cluster.                                         | Same metrics available in both systems |
+| feature_161        | The number of Out-of-Memory (OOM) events that occurred in the database cluster associated with the query on the previous day.                                 | Same metrics available in both systems |
+| feature_162        | Whether the query specifies batch execution mode.                             | Same metrics available in both systems |
 
 ## 📚 Rule Library
 Please refer to [rule library](https://github.com/SafeLoad-project/SafeBench/blob/main/rule_library.txt) for more details.
