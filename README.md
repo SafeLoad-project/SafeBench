@@ -174,20 +174,20 @@ The following table lists the features associated with each query in SafeBench, 
 | feature_114 | The maximum estimated input size across all sort nodes. | Same metrics available in both systems' sort operators |
 | feature_115 | The total estimated output size across all sort nodes. | Same metrics available in both systems' sort operators |
 | feature_116 | The maximum estimated output size across all sort nodes. | Same metrics available in both systems' sort operators |
-| feature_117        | The number of filter nodes.                                           | **Snowflake**: Filter<br>**Redshift**: Filter |
-| feature_118        | The number of output nodes.                                           | **Snowflake**: Result<br>**Redshift**: Result |
-| feature_119        | The number of project nodes.                                          | **Snowflake**: Project<br>**Redshift**: Project |
-| feature_120        | The number of sipConsumer nodes.                                      | **Snowflake**: Runtime Filter Consumer<br>**Redshift**: Runtime Filter Consumer |
-| feature_121        | The number of sipProducer nodes.                                      | **Snowflake**: Runtime Filter Producer<br>**Redshift**: Runtime Filter Producer |
-| feature_122        | The number of scalar nodes.                                           | **Snowflake**: Scalar functions<br>**Redshift**: Scalar functions |
-| feature_123        | The number of runtimeCollect nodes.                                   | **Snowflake**: Runtime Filter Collection<br>**Redshift**: Runtime Filter Collection |
-| feature_124        | The number of runtimeFilter nodes.                                    | **Snowflake**: JoinFilter<br>**Redshift**: Runtime filtering |
-| feature_125        | The number of values nodes.                                           | **Snowflake**: ValuesClause<br>**Redshift**: VALUES clause |
-| feature_126        | The number of runtimeScan nodes.                                      | Filtering Scan Operator |
-| feature_127        | The total number of INNER-type joins among all join nodes.                      | **Snowflake**: INNER join<br>**Redshift**: INNER join |
-| feature_128        | The total number of FULL-type joins among all join nodes.                       | **Snowflake**: FULL OUTER join<br>**Redshift**: FULL join |
-| feature_129        | The total number of LEFT-type joins among all join nodes.                       | **Snowflake**: LEFT OUTER join<br>**Redshift**: LEFT join |
-| feature_130        | The total number of RIGHT-type joins among all join nodes.                      | **Snowflake**: RIGHT OUTER join<br>**Redshift**: RIGHT join |
+| feature_117        | The number of filter nodes.                                           | Filter Operator in both systems |
+| feature_118        | The number of output nodes.                                           | Result Operator in both systems |
+| feature_119        | The number of project nodes.                                          | Project Operator in both systems |
+| feature_120        | The number of sipConsumer nodes.                                      | Runtime Filter Consumer Operator in both systems |
+| feature_121        | The number of sipProducer nodes.                                      | Runtime Filter Producer Operator in both systems |
+| feature_122        | The number of scalar nodes.                                           | Scalar functions in both systems |
+| feature_123        | The number of runtimeCollect nodes.                                   | Runtime Filter Collection  Operator in both systems |
+| feature_124        | The number of runtimeFilter nodes.                                    | Value Operator in both systems |
+| feature_125        | The number of values nodes.                                           | Values Clause in both systems |
+| feature_126        | The number of runtimeScan nodes.                                      | Filtering Scan Operator  in both systems |
+| feature_127        | The total number of INNER-type joins among all join nodes.                      | INNER join  in both systems |
+| feature_128        | The total number of FULL-type joins among all join nodes.                       | FULL OUTER  in both systems  |
+| feature_129        | The total number of LEFT-type joins among all join nodes.                       | LEFT OUTER in both systems  |
+| feature_130        | The total number of RIGHT-type joins among all join nodes.                      | RIGHT OUTER join in both systems  |
 | feature_131        | The total number of join nodes with a REPLICATED distribution type.                 | **Snowflake**: Broadcast join<br>**Redshift**: DS_BCAST_INNER |
 | feature_132        | The total number of join criteria across all join nodes.                | Join condition attributes available in both systems |
 | feature_133        | The total number of output symbols of type VARCHAR across all join nodes. | Data type information available in both systems' query plans |
