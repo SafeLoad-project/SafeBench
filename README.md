@@ -224,5 +224,9 @@ The following table lists the features associated with each query in SafeBench, 
 ## 📚 Rule Library
 Please refer to [rule library](https://github.com/SafeLoad-project/SafeBench/blob/main/rule_library.txt) for more details.
 
+## About MO Queries
+[1] Alibaba Cloud. 2025. Intelligent Routing of Memory - Overloading Queries in Serverless Data Warehouses. [Link](https://www.alibabacloud.com/blog/intelligent-routing-of-memory---overloading-queries-in-serverless-data-warehouses_602559). 
+[2] Alibaba Cloud. 2025. Introducing Intelligent Query Routing on AnalyticDB for Always Online Analytics - No Crash! [Link](https://www.alibabacloud.com/blog/introducing-intelligent-query-routing-on-analyticdb-for-always-online-analytics---no-crash_602558).
+
 ## 📝 License
 SafeBench is released under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). This license permits non-commercial use, distribution, and reproduction in any medium, provided the original author(s) and source are credited. For detailed terms, please refer to the [CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/) deed.
