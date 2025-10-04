@@ -226,6 +226,7 @@ Please refer to [rule library](https://github.com/SafeLoad-project/SafeBench/blo
 
 ## About MO Queries
 [1] Alibaba Cloud. 2025. Intelligent Routing of Memory - Overloading Queries in Serverless Data Warehouses. [Link](https://www.alibabacloud.com/blog/intelligent-routing-of-memory---overloading-queries-in-serverless-data-warehouses_602559). 
+
 [2] Alibaba Cloud. 2025. Introducing Intelligent Query Routing on AnalyticDB for Always Online Analytics - No Crash! [Link](https://www.alibabacloud.com/blog/introducing-intelligent-query-routing-on-analyticdb-for-always-online-analytics---no-crash_602558).
 
 ## 📝 License
